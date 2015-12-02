@@ -1,0 +1,29 @@
+#! /usr/bin/env python
+
+import argparse
+from mutanno.run import *
+
+
+####################
+# top level parser
+parser = argparse.ArgumentParser( description = 'annotateion of genomic mutations' )
+parser.add_argument("--version", action = "version", version = "GenomonMutationAnnotation-0.1.0")
+subparsers = parser.add_subparsers()
+
+
+####################
+# mutation annotator
+parse_parser = subparsers.add_parser("mutation")
+parse_parser.add_argument( '-t', '--target_mutation_file', help = 'mutations text(anno format)', type = str, default = None, required = True )
+parse_parser.add_argument( '-o', '--output', help = 'Output text file', type = str, default = None, required = True)
+parse_parser.add_argument( '-d', '--tabix_db', help = 'tabix database', type = str, default = None, required = True)
+parse_parser.add_argument( '-c', '--column_size', help = 'output column size', type = int, default = 1)
+parse_parser.add_argument('--header', help = 'print header', type = str, default = None)
+parse_parser.set_defaults(func = run_annotate)
+
+####################
+args = parser.parse_args()
+args.func(args)
+
+
+
