@@ -61,7 +61,7 @@ class annotator:
                     alt_db = record[4]
 
                     if ref == ref_db and alt == alt_db:
-                        result = record[5].replace(";","\t")
+                        result = record[5].replace(";;","\t")
 
             except ValueError:
                 exc_type, exc_obj, exc_tb = sys.exc_info()
